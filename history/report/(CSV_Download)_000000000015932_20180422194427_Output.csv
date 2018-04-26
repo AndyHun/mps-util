@@ -1,17 +1,3 @@
-
-Transactions Submitted
-Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency,
-
-Cancelled
-Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency,
-
-InProgress
-Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency,
-
-Failed
-Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency,Reason Code,
-
-Future
 Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency,
 9916128,2373,2018/04/30,2,2 Day Debit,2,F,200.00,3,
 9995546,3940,2018/04/30,2,2 Day Debit,2,C,88.00,3,
@@ -2862,9 +2848,3 @@ Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Acco
 10353226,4627,2018/04/30,1,2 Day Debit,1,N,300.00,3,
 8777871,3481,2018/04/30,4,2 Day Debit,5,T,160.00,3,
 10353694,2452,2018/04/30,1,2 Day Debit,4,N,88.00,3,
-
-Inactive
-Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency,
-
-Dispute
-Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency,

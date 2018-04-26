@@ -7,7 +7,7 @@ const path = require('path');
 const moment = require('moment');
 //const commander = require('commander');
 
-const obj = xlsx.parse(__dirname+'/data.xlsx');
+const obj = xlsx.parse(__dirname+ config.transferFileSource);
 const excelData=obj[0].data;
 
 class Client {
@@ -78,6 +78,7 @@ let installment = 1;
 let client = null;
 let index = 0;
 let content='';
+/*Print Title*/
 printTitle();
 for(let record of excelData) {
 	if(index == 0) {
@@ -95,7 +96,7 @@ for(let record of excelData) {
 	buildTransition(index, client, debitValue, installment, record);
 	index++;
 }
-let csvFileName = `./${config.merchantId}_2N_${moment().format('MMDDHHmmss')}.csv`;
+let csvFileName = `./output/${config.merchantId}_2N_${moment().format('MMDDHHmmss')}.csv`;
 fs.writeFile(path.resolve(__dirname, csvFileName), content, function(err) {
 	if(err) {
 		return console.log(err);
