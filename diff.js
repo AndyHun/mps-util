@@ -5,8 +5,8 @@ const config = require('./config.js');
 const path = require('path');
 const moment = require('moment');
 
-function buildCacheKey(clientRef, instalments, accountName, money) {
-    return `${clientRef}-${accountName}-${money}-${instalments}`;
+function buildCacheKey(clientRef, instalment,instalments, accountName, money) {
+    return `${clientRef}-${accountName}-${money}-${instalment}-${instalments}`;
 }
 
 function buildShortCacheKey(clientRef, accountName, money) {
@@ -15,6 +15,7 @@ function buildShortCacheKey(clientRef, accountName, money) {
 
 function getShortCacheKey(longCacheKey) {
     let longCacheKeySplits = longCacheKey.split('-');
+    longCacheKeySplits.pop();
     longCacheKeySplits.pop();
     longCacheKeySplits.pop();
     return longCacheKeySplits.join('-');
@@ -33,7 +34,7 @@ for(let reportRow of reportCsv) {
         reportTitle = reportRow;
         continue;
     }
-    cacheKey = buildCacheKey(reportRow[1],reportRow[5],reportRow[6],reportRow[7]);
+    cacheKey = buildCacheKey(reportRow[1],reportRow[3],reportRow[5],reportRow[6],reportRow[7]);
     shortCacheKey = buildShortCacheKey(reportRow[1],reportRow[6],reportRow[7]);
     if(!reportCache.get(cacheKey)){
         reportCache.set(cacheKey, [reportRow]);
@@ -59,7 +60,7 @@ for(let transferRow of transferCsv) {
         transferTitle = transferRow;
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     shortCacheKey = buildShortCacheKey(transferRow[7],transferRow[2],transferRow[6]/100);
     if(!reportCache.get(cacheKey)){
         if(!notMatchCache.get(cacheKey)) {
