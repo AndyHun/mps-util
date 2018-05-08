@@ -7,6 +7,13 @@ const path = require('path');
 const moment = require('moment');
 //const commander = require('commander');
 
+/*verify config.actionDate*/
+if(parseInt(moment().format('YYYYMMDD')) > config.actionDate) {
+    throw new Error(`config.actionDate:${config.actionDate} 已经过期,请重新配置这次有效结算的时间!!`);
+}
+
+console.log(`这次配置的结算时间是:${config.actionDate}`);
+
 const obj = xlsx.parse(__dirname+ config.transferFileSource);
 const excelData=obj[0].data;
 
@@ -67,7 +74,7 @@ function buildTransition(index, client, debitValue, installment, record) {
 	}
 	for(let debitTemp of debitSegments) {
 		//console.log(`${client.accountId},${config.branchCode},${client.name},${config.accountType},20180430,${installment},${debitTemp}00,${client.reference},${client.reference},${config.frequency},${client.id},0,0,0,${config.cardAcceptor}`);
-		content += `${client.accountId},${config.branchCode},${client.name},${config.accountType},20180430,${installment},${debitTemp}00,${client.reference},${client.reference},${config.frequency},${client.id},0,0,0,${config.cardAcceptor}\r\n`
+		content += `${client.accountId},${config.branchCode},${client.name},${config.accountType},${config.actionDate},${installment},${debitTemp}00,${client.reference},${client.reference},${config.frequency},${client.id},0,0,0,${config.cardAcceptor}\r\n`
 	}
 }
 
