@@ -1,8 +1,5 @@
-如何处理发送过来的数据
-1.最后一列有标注英文的不上传,那是已经走刷卡的
+# Rule of processing source data
+* Skip records which last column marked English. The records are slot card type.
 
-目录讲解
-
-output 目录内容可随意清空
-
-fix 目录如果有内容表示，还有数据修复工作未完成
+#Folder Description
+* output: You can clean the content under this folder at any time.
