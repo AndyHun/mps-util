@@ -1,0 +1,21 @@
+Total Failure:,5
+Account Number,Branch Code,Account Name,Account Type,Action Date,Number Of Installments,Value of Debit,Client Reference 1,Client Reference 2,Frequency,ID Number,SMS Flag,Cell Number,Days Warning,Card Acceptor
+2108773823,584000,X,1,20180531,3,29500,5300,5300,3,8811300844083,0,0,0,15932
+Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency
+
+Account Number,Branch Code,Account Name,Account Type,Action Date,Number Of Installments,Value of Debit,Client Reference 1,Client Reference 2,Frequency,ID Number,SMS Flag,Cell Number,Days Warning,Card Acceptor
+9119438849,584000,P,1,20180531,3,29500,4640,4640,3,4812170602084,0,0,0,15932
+Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency
+
+Account Number,Branch Code,Account Name,Account Type,Action Date,Number Of Installments,Value of Debit,Client Reference 1,Client Reference 2,Frequency,ID Number,SMS Flag,Cell Number,Days Warning,Card Acceptor
+2108598247,584000,N,1,20180531,3,30000,3554,3554,3,6612252477084,0,0,0,15932
+Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency
+
+Account Number,Branch Code,Account Name,Account Type,Action Date,Number Of Installments,Value of Debit,Client Reference 1,Client Reference 2,Frequency,ID Number,SMS Flag,Cell Number,Days Warning,Card Acceptor
+2108598247,584000,N,1,20180531,3,5000,3554,3554,3,6612252477084,0,0,0,15932
+Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency
+
+Account Number,Branch Code,Account Name,Account Type,Action Date,Number Of Installments,Value of Debit,Client Reference 1,Client Reference 2,Frequency,ID Number,SMS Flag,Cell Number,Days Warning,Card Acceptor
+21435570636,584000,Z,1,20180531,3,29500,5676,5676,3,9012291266084,0,0,0,15932
+Transaction ID,Client Ref 2,Action Date,Instalment,Service Type,Instalments,Account Name,Value,Frequency
+
