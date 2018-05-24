@@ -5,8 +5,8 @@ const config = require('./config.js');
 const path = require('path');
 const moment = require('moment');
 
-function buildCacheKey(clientRef, instalment,instalments, accountName, money) {
-    return `${clientRef}-${accountName}-${money}-${instalment}-${instalments}`;
+function buildCacheKey(accountNum,clientRef, instalment,instalments, accountName, money) {
+    return `${accountNum}-${clientRef}-${accountName}-${money}-${instalment}-${instalments}`;
 }
 //D:\WorkSpace\GTC\mps-util\history\upload\15932_2N_0508191311.csv
 //D:\WorkSpace\GTC\mps-util\history\upload\15932_2N_0510194219.csv
@@ -34,7 +34,7 @@ for(let transferRow of transferCsv2) {
     if(index2 === 1) {
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0],transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     cache2.set(cacheKey, transferRow);
 }
 index2 =0;
@@ -43,7 +43,7 @@ for(let transferRow of transferCsv3) {
     if(index2 === 1) {
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0],transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     cache2.set(cacheKey, transferRow);
 }
 index2 =0;
@@ -52,7 +52,7 @@ for(let transferRow of transferCsv4) {
     if(index2 === 1) {
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0],transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     cache2.set(cacheKey, transferRow);
 }
 index2 =0;
@@ -61,7 +61,7 @@ for(let transferRow of transferCsv5) {
     if(index2 === 1) {
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0],transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     cache2.set(cacheKey, transferRow);
 }
 
@@ -76,7 +76,7 @@ for(let transferRow of transferCsv6) {
     if(index2 === 1) {
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0],transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     cache2.set(cacheKey, transferRow);
 }
 index2 =0;
@@ -85,7 +85,7 @@ for(let transferRow of transferCsv7) {
     if(index2 === 1) {
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0],transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     cache2.set(cacheKey, transferRow);
 }
 index2 =0;
@@ -94,7 +94,7 @@ for(let transferRow of transferCsv8) {
     if(index2 === 1) {
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0],transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     cache2.set(cacheKey, transferRow);
 }
 index2 =0;
@@ -103,7 +103,7 @@ for(let transferRow of transferCsv9) {
     if(index2 === 1) {
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0],transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     cache2.set(cacheKey, transferRow);
 }
 index2 =0;
@@ -112,7 +112,7 @@ for(let transferRow of transferCsv10) {
     if(index2 === 1) {
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0],transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     cache2.set(cacheKey, transferRow);
 }
 
@@ -137,7 +137,7 @@ for(let transferRow of transferCsv1) {
         transferTitle = transferRow;
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0],transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
     if(cache2.get(cacheKey)) {
         matchList.push(cache2.get(cacheKey));
     }
