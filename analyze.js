@@ -21,6 +21,10 @@ function getShortCacheKey(longCacheKey) {
     return longCacheKeySplits.join('-');
 }
 
+function getExsitedMoneyList(reportRows) {
+    return reportRows.map(reportRow => reportRow[7]*100);
+}
+
 
 const reportCsv = xlsx.parse(__dirname+ config.reportFilePath)[0].data;
 const reportCache = new Map();/*(key,Array)*/
@@ -75,12 +79,14 @@ console.log(notMatchCache.keys());
 console.log(notMatchCache.get('4235-N-3--300'));*/
 
 let content=`Total Failure:,${notMatchCache.size}\r\n`;
+let fixedContent=`Total Failure:,${notMatchCache.size}\r\n`;
 let idOrAccountWrongContent = buildRow(transferTitle);
 let shortKeyReportRows;
 function buildRow(value) {
     return `${value.join(',')}\r\n`;
 }
 function buildContent() {
+    fixedContent += buildRow(transferTitle);
     notMatchCache.forEach((value,key,map) => {
         shortKeyReportRows = shortKeyReportCache.get(getShortCacheKey(key));
         if(!shortKeyReportRows) {
@@ -91,6 +97,25 @@ function buildContent() {
         content += buildRow(transferTitle);
         value.forEach(row => {
             content += buildRow(row);
+            /*Fix the conflict money account*/
+            let isFixed = false;
+            if(shortKeyReportRows) {
+                let exsitedMoneyList = getExsitedMoneyList(shortKeyReportRows);
+                /*content += buildRow(exsitedMoneyList);*/
+                for(let addMoneyIndex = 1; addMoneyIndex<=3; addMoneyIndex ++) {
+                    if(exsitedMoneyList.indexOf(row[6]+addMoneyIndex*100) <0) {
+                        row[6] = row[6]+addMoneyIndex*100;
+                        content += buildRow(row);
+                        fixedContent += buildRow(row);
+                        isFixed = true;
+                        break;
+                    }
+                }
+                if(!isFixed) {
+                    content += buildRow(['Not Fixed']);
+                    fixedContent += buildRow(['Not Fixed,'].concat(row));
+                }
+            }
         });
         content += buildRow(reportTitle);
         if(shortKeyReportRows) {
@@ -104,12 +129,19 @@ function buildContent() {
 buildContent();
 let postfix = moment().format('MMDDHHmmss');
 let diffDetailFileName = `./output/diffDetail_${postfix}.csv`;
+let fixedFileName = `./output/fixed_${postfix}.csv`;
 let idOrAccountWrongFilenName = `./output/IdOrAccountWrong_${postfix}.csv`;
 fs.writeFile(path.resolve(__dirname, diffDetailFileName), content, function(err) {
 	if(err) {
 		return console.log(err);
 	}
 	console.log(`${diffDetailFileName} created!`);
+});
+fs.writeFile(path.resolve(__dirname, fixedFileName), fixedContent, function(err) {
+    if(err) {
+        return console.log(err);
+    }
+    console.log(`${fixedFileName} created!`);
 });
 fs.writeFile(path.resolve(__dirname, idOrAccountWrongFilenName), idOrAccountWrongContent, function(err) {
 	if(err) {
