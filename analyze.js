@@ -5,12 +5,12 @@ const config = require('./config.js');
 const path = require('path');
 const moment = require('moment');
 
-function buildCacheKey(clientRef, instalment,instalments, accountName, money) {
-    return `${clientRef}-${accountName}-${money}-${instalment}-${instalments}`;
+function buildCacheKey(accountNum, idNum, clientRef, instalment,instalments, accountName, money) {
+    return `${accountNum}-${idNum}-${clientRef}-${accountName}-${money}-${instalment}-${instalments}`;
 }
 
-function buildShortCacheKey(clientRef, accountName, money) {
-    return `${clientRef}-${accountName}`;
+function buildShortCacheKey(accountNum, idNum, clientRef, accountName, money) {
+    return `${accountNum}-${idNum}-${clientRef}-${accountName}`;
 }
 
 function getShortCacheKey(longCacheKey) {
@@ -38,8 +38,8 @@ for(let reportRow of reportCsv) {
         reportTitle = reportRow;
         continue;
     }
-    cacheKey = buildCacheKey(reportRow[1],reportRow[3],reportRow[5],reportRow[6],reportRow[7]);
-    shortCacheKey = buildShortCacheKey(reportRow[1],reportRow[6],reportRow[7]);
+    cacheKey = buildCacheKey(reportRow[7], reportRow[10], reportRow[1],reportRow[3],reportRow[5],reportRow[6],reportRow[8]);
+    shortCacheKey = buildShortCacheKey(reportRow[7], reportRow[10], reportRow[1],reportRow[6],reportRow[7]);
     if(!reportCache.get(cacheKey)){
         reportCache.set(cacheKey, [reportRow]);
     }else {
@@ -64,8 +64,8 @@ for(let transferRow of transferCsv) {
         transferTitle = transferRow;
         continue;
     }
-    cacheKey = buildCacheKey(transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
-    shortCacheKey = buildShortCacheKey(transferRow[7],transferRow[2],transferRow[6]/100);
+    cacheKey = buildCacheKey(transferRow[0], transferRow[10], transferRow[7],1,transferRow[5],transferRow[2],transferRow[6]/100);
+    shortCacheKey = buildShortCacheKey(transferRow[0], transferRow[10], transferRow[7],transferRow[2],transferRow[6]/100);
     if(!reportCache.get(cacheKey)){
         if(!notMatchCache.get(cacheKey)) {
             notMatchCache.set(cacheKey, [transferRow]);
@@ -95,6 +95,9 @@ function buildContent() {
             });
         }
         content += buildRow(transferTitle);
+        if(value.length > 1) {
+            console.log(`Key conflict ${key}`);
+        }
         value.forEach(row => {
             content += buildRow(row);
             /*Fix the conflict money account*/
@@ -105,6 +108,7 @@ function buildContent() {
                 for(let addMoneyIndex = 1; addMoneyIndex<=3; addMoneyIndex ++) {
                     if(exsitedMoneyList.indexOf(row[6]+addMoneyIndex*100) <0) {
                         row[6] = row[6]+addMoneyIndex*100;
+                        content += buildRow(['fixed as below...,'])
                         content += buildRow(row);
                         fixedContent += buildRow(row);
                         isFixed = true;

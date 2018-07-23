@@ -7,9 +7,9 @@ const config = {
     accountType: 1, //1:Current, 2: Savings, 3: Transmission
     frequency: 3, //0:Once Off, 1:Weekly, 2:Fortnightly, 3:Monthly, 4:First Working Day, 5:Last Working Day
     transferFileSource: '/input/data.xlsx',
-    reportFilePath: '/history/report/(CSV_Download)_000000000015932_20180619104927_Output.csv',
-    transferFilePath: '/history/upload/15932_2N_0619163916.csv',
-    actionDate: 20180630,
+    reportFilePath: '/history/report/(CSV_Download)_000000000015932_20180723093150_Output.csv',
+    transferFilePath: '/history/upload/15932_2N_0723161453.csv',
+    actionDate: 20180731,
     verifyUploaded: {
         actionDate: '20180430',
         reportFilePath: '/history/report/(CSV_Download)_000000000015932_20180514080030_Output.csv',
